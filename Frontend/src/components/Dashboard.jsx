@@ -56,7 +56,7 @@ const Dashboard = () => {
 
                     myPost.map(item => (
 
-                        <div className="flex justify-center items-center ">
+                        <div className="flex justify-center items-center  ">
 
 
                             <div className="border-[1px] border-gray-400 h-[350px] md:w-[220px] sm:w-[350px] rounded-2xl mt-14  hover:shadow-2xl hover:shadow-gray-500/50 ">
