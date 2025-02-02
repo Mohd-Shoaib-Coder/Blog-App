@@ -14,7 +14,7 @@ const Dashboard = () => {
 
     useEffect(() => {
         if (id) {
-            fetch(`http://localhost:4000/dashboard/${id}`)
+            fetch(`https://blog-app-x01e.onrender.com/dashboard/${id}`)
                 .then(response => {
                     if (!response.ok) {
                         console.error("Response not OK:", response);

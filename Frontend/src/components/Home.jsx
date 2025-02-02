@@ -8,19 +8,27 @@ const Home = () => {
 
   const [posts, setPosts] = useState([]);
 
-
   useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const response = await fetch("https://blog-app-x01e.onrender.com/post");
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const data = await response.json(); 
+        setPosts(data); 
+      } catch (error) {
+        console.error("Error fetching posts:", error);
+      }
+    };
 
-    fetch("http://localhost:4000/post").then(response => {
-
-      response.json().then(posts => {
-        setPosts(posts)
-      })
-    })
-  }, []
+    fetchPosts(); 
+  }, []); 
 
 
-  )
+
+
+
   return (
 
 

@@ -50,7 +50,7 @@ import { Navigate } from "react-router-dom";
     
        
         
-    const response=await   fetch("http://localhost:4000/post",{
+    const response=await   fetch("https://blog-app-x01e.onrender.com/post",{
 
         method:"POST",
         body:formData,

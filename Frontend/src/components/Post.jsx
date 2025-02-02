@@ -20,7 +20,7 @@ const Post = ({ _id, title, summary, cover, createdAt, author }) => {
               // src={'http://localhost:4000/' + cover}
               // src="src/assets/react.svg"
 
-              src={`http://localhost:4000${cover}`}
+              src={`https://blog-app-x01e.onrender.com${cover}`}
 
 
               alt="sorry"
