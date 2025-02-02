@@ -36,7 +36,7 @@ const SinglePost = ({ createdAt }) => {
 
             src={
               postInfo.cover
-                ? `http://localhost:4000${postInfo.cover}`
+                ? `https://blog-app-x01e.onrender.com${postInfo.cover}`
                 : "http://via.placeholder.com/400x200?text=No+Image"
             }
 
