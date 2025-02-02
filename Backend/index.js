@@ -9,6 +9,10 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const Post = require("./Models/post");
 const User = require("./Models/user");
+require('dotenv').config()
+
+
+
 
 const app = express();
 
@@ -16,6 +20,10 @@ const app = express();
 const salt = bcrypt.genSaltSync(10);
 const secret = "hvdukfvwefuwyeifwwhveifuyevfwiefwiebcnwoine";
 const uploadDir = path.join(__dirname, "uploads");
+
+
+const _dirname=path.resolve();
+
 
 // Middleware
 app.use(cors({ credentials: true, origin: "http://localhost:5173" }));
@@ -33,7 +41,8 @@ if (!fs.existsSync(uploadDir)) {
 }
 
 // Database connection
-mongoose.connect("mongodb+srv://000sheikhsiddiqui:s0SpqLDWuAeq3K56@cluster0.f9twh.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0");
+mongoose.connect(process.env.Mongo_Key)
+        .then(() => console.log("server Started..."));
 
 // Routes
 app.get("/", (req, res) => {
@@ -168,8 +177,6 @@ app.post("/logout", (req, res) => {
 
 app.get("/post", async (req, res) => {
    
-
-
     try {
         const posts = await Post.find()
             .populate("author", ["name", "email"])
@@ -219,9 +226,16 @@ app.get("/dashboard/:id", async (req, res) => {
     }
   });
 
+app.use(express.static(path.join(_dirname, "/frontend/dist")));
+
+app.get('*',(_,res)=>{
+
+    res.sendFile(path.resolve(_dirname, 'frontend','dist','index.html'))
+})
+
 
 // Server Setup
-const port = 4000;
+const port = process.env.PORT;
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
