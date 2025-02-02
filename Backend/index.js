@@ -26,7 +26,7 @@ const _dirname=path.resolve();
 
 
 // Middleware
-app.use(cors({ credentials: true, origin: "http://localhost:5173" }));
+app.use(cors({ credentials: true, origin: "https://byte-breakdown-k8hg.onrender.com" }));
 app.use(express.json());
 app.use(cookieParser());
 // app.use("/uploads", express.static(uploadDir));
