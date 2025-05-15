@@ -26,7 +26,26 @@ const _dirname=path.resolve();
 
 
 // Middleware
+<<<<<<< HEAD
 app.use(cors({ credentials: true, origin: "https://byte-breakdown-k8hg.onrender.com" }));
+=======
+// app.use(cors({ credentials: true, origin: "http://localhost:5173" }));
+const allowedOrigins = [
+  "http://localhost:5173",               // for local dev
+  "https://byte-breakdown-k8hg.onrender.com"  // for production frontend
+];
+// app.use(cors({ credentials: true, origin: "https:byte-breakdown-k8hg.onrender.com"}));
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true
+}));
+>>>>>>> b87e99f (cors solved)
 app.use(express.json());
 app.use(cookieParser());
 // app.use("/uploads", express.static(uploadDir));
@@ -239,3 +258,7 @@ const port = process.env.PORT;
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
+
+
+
+
