@@ -17,10 +17,9 @@ const Post = ({ _id, title, summary, cover, createdAt, author }) => {
 
             <img
               className="h-full w-full object-cover"
-              // src={'http://localhost:4000/' + cover}
-              // src="src/assets/react.svg"
+              
 
-              src={`https://blog-app-x01e.onrender.com${cover}`}
+              src={`http://localhost:4000${cover}`}
 
 
               alt="sorry"

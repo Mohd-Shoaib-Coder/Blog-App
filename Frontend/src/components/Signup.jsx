@@ -30,7 +30,7 @@ try{
         password:password,
     };
 
-    const response=await fetch("https://blog-app-x01e.onrender.com/signup",{
+    const response=await fetch("http://localhost:4000/signup",{
 
         method:"POST",
         headers:{

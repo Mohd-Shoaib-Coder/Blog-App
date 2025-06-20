@@ -11,7 +11,7 @@ const Home = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await fetch("https://blog-app-x01e.onrender.com/post");
+        const response = await fetch("http://localhost:4000/post");
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }

@@ -9,6 +9,7 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const Post = require("./Models/post");
 const User = require("./Models/user");
+
 require('dotenv').config()
 
 
@@ -31,35 +32,49 @@ app.use(cors({ credentials: true, origin: "https://byte-breakdown-k8hg.onrender.
 =======
 // app.use(cors({ credentials: true, origin: "http://localhost:5173" }));
 const allowedOrigins = [
-  "http://localhost:5173",               // for local dev
-  "https://byte-breakdown-k8hg.onrender.com"  // for production frontend
+  "http://localhost:5173",
+  "https://byte-breakdown-k8hg.onrender.com",
 ];
-// app.use(cors({ credentials: true, origin: "https:byte-breakdown-k8hg.onrender.com"}));
-app.use(cors({
-  origin: function (origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
+
+
+const corsOptions = {
+  origin: (origin, callback) => {
+    if (
+      !origin ||                                   
+      origin.includes("localhost") ||              
+      origin.includes("onrender.com")              
+    ) {
       callback(null, true);
     } else {
-      callback(new Error("Not allowed by CORS"));
+      callback(new Error("CORS not allowed for: " + origin));
     }
   },
+<<<<<<< HEAD
   credentials: true
 }));
 >>>>>>> b87e99f (cors solved)
+=======
+  credentials: true,
+};
+
+
+app.use(cors(corsOptions));
+
+
+>>>>>>> 2f6b4a4 (App revised)
 app.use(express.json());
 app.use(cookieParser());
-// app.use("/uploads", express.static(uploadDir));
+
 app.use('/uploads', express.static('uploads'));
 
-// Configure Multer for file uploads
 const uploadMiddleware = multer({ dest: "uploads/" });
 
-// Ensure the uploads directory exists
+
 if (!fs.existsSync(uploadDir)) {
     fs.mkdirSync(uploadDir);
 }
 
-// Database connection
+
 mongoose.connect(process.env.Mongo_Key)
         .then(() => console.log("server Started..."));
 
@@ -122,13 +137,15 @@ app.post("/login", async (req, res) => {
 app.get("/profile", (req, res) => {
     const { token } = req.cookies;
 
+    
+
     if (!token) {
-        return res.status(401).json("Token not provided"); // Handle missing token
+        return res.status(401).json("Token not provided"); 
     }
 
     jwt.verify(token, secret, {}, (err, info) => {
         if (err) {
-            return res.status(403).json("Invalid token"); // Handle verification failure
+            return res.status(403).json("Invalid token"); 
         }
         res.json({
             id: info.id,
@@ -232,12 +249,10 @@ app.get("/dashboard/:id", async (req, res) => {
     console.log("Backend ka hun mai:", id);
   
     try {
-        // .populate('author', ['name']);
+        
       const myPost = await Post.find({author:id})
       console.log(myPost)
-    //   if (!myPost) {
-    //     return res.status(404).json({ message: "No post found for this ID" });
-    //   }
+    
       res.json(myPost);
     } catch (error) {
       console.error("Error fetching from database:", error);
@@ -254,7 +269,7 @@ app.get('*',(_,res)=>{
 
 
 // Server Setup
-const port = process.env.PORT;
+const port = process.env.PORT || 3000;
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });

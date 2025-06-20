@@ -14,7 +14,7 @@ const Navbar = () => {
 
     useEffect(() => {
 
-        fetch("https://blog-app-x01e.onrender.com/profile", {
+        fetch("http://localhost:4000/profile", {
 
             credentials: "include",
         }).then((response) => {

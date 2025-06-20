@@ -27,15 +27,7 @@ import { Navigate } from "react-router-dom";
         console.log(files)
 
 
-        // const postData={
-
-        //     title:title,
-        //     summary:summary,
-        //     content:content,
-        //     files:files[0],
-
-
-        // }
+      
 
         const formData=new FormData();
 
@@ -50,7 +42,7 @@ import { Navigate } from "react-router-dom";
     
        
         
-    const response=await   fetch("https://blog-app-x01e.onrender.com/post",{
+    const response=await   fetch("http://localhost:4000/post",{
 
         method:"POST",
         body:formData,

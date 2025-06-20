@@ -14,7 +14,7 @@ const Dashboard = () => {
 
     useEffect(() => {
         if (id) {
-            fetch(`https://blog-app-x01e.onrender.com/dashboard/${id}`)
+            fetch(`http://localhost:4000/dashboard/${id}`)
                 .then(response => {
                     if (!response.ok) {
                         console.error("Response not OK:", response);
@@ -64,7 +64,7 @@ const Dashboard = () => {
 
                                 <div className="flex justify-center items-center">
 
-                                    <img className="h-[180px] w-[200px] mt-2 rounded-2xl" src={`http://localhost:4000${item.cover}`} alt="sorry" />
+                                    <img  className="max-h-[180px] w-[200px] mt-2 rounded-2xl object-contain" src={`http://localhost:4000${item.cover}`} alt="sorry" />
                                 </div>
 
 
