@@ -27,9 +27,6 @@ const _dirname=path.resolve();
 
 
 // Middleware
-<<<<<<< HEAD
-app.use(cors({ credentials: true, origin: "https://byte-breakdown-k8hg.onrender.com" }));
-=======
 // app.use(cors({ credentials: true, origin: "http://localhost:5173" }));
 const allowedOrigins = [
   "http://localhost:5173",
@@ -49,11 +46,6 @@ const corsOptions = {
       callback(new Error("CORS not allowed for: " + origin));
     }
   },
-<<<<<<< HEAD
-  credentials: true
-}));
->>>>>>> b87e99f (cors solved)
-=======
   credentials: true,
 };
 
@@ -61,7 +53,6 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 
->>>>>>> 2f6b4a4 (App revised)
 app.use(express.json());
 app.use(cookieParser());
 
@@ -246,7 +237,7 @@ app.get("/dashboard/:id", async (req, res) => {
     const { id } = req.params;
    
 
-    console.log("Backend ka hun mai:", id);
+ 
   
     try {
         
