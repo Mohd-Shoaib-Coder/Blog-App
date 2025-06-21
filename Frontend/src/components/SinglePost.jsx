@@ -77,4 +77,4 @@ export default SinglePost;
 
 
 
-//src={`http://localhost:4000/${postInfo.cover}`}
+
