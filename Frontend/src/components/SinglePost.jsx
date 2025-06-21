@@ -12,7 +12,7 @@ const SinglePost = ({ createdAt }) => {
 
   useEffect(() => {
 
-    fetch(`http://localhost:4000/post/${id}`)
+    fetch(`https://blog-app-ve13.onrender.com/post/${id}`)
       .then(response => {
         response.json()
           .then(postInfo => {
@@ -35,7 +35,7 @@ const SinglePost = ({ createdAt }) => {
             className="max-h-[400px] w-full object-contain rounded-lg" // ✅ CHANGED: h-[400px] → max-h-[400px], object-cover → object-contain
             src={
               postInfo.cover
-                ? `http://localhost:4000${postInfo.cover}`
+                ? `https://blog-app-ve13.onrender.com${postInfo.cover}`
                 : "http://via.placeholder.com/400x200?text=No+Image"
             }
             alt={postInfo.title}

@@ -19,7 +19,7 @@ const Post = ({ _id, title, summary, cover, createdAt, author }) => {
               className="h-full w-full object-cover"
               
 
-              src={`http://localhost:4000${cover}`}
+              src={`https://blog-app-ve13.onrender.com${cover}`}
 
 
               alt="sorry"
