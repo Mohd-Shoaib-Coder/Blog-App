@@ -1,11 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Post from "./Post";
-import { useState, useEffect } from "react";
-
-
 
 const Home = () => {
-
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
@@ -15,40 +11,28 @@ const Home = () => {
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
-        const data = await response.json(); 
-        setPosts(data); 
+        const data = await response.json();
+        setPosts(data);
       } catch (error) {
         console.error("Error fetching posts:", error);
       }
     };
 
-    fetchPosts(); 
-  }, []); 
-
-
-
-
+    fetchPosts();
+  }, []);
 
   return (
-
-
-    <div className="w-[1000px]  mx-auto sm:w-[400px] md:w-[650px] lg:w-[1000px]   ">
-
-
-
+    <div className="w-full px-4 sm:px-6 md:px-8 max-w-6xl mx-auto mt-6">
       {posts.length > 0 ? (
-
-        posts.map((post) => <Post key={Post._id} {...post} />)
-        
+        <div className="flex flex-col gap-6">
+          {posts.map((post) => (
+            <Post key={post._id} {...post} />
+          ))}
+        </div>
       ) : (
-        <p>No Post Available</p>
+        <p className="text-center text-gray-500">No Post Available</p>
       )}
-
-
     </div>
-
-
-
   );
 };
 
