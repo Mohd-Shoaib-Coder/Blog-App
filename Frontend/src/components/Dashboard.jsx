@@ -2,123 +2,65 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 const Dashboard = () => {
+  const { id } = useParams();
+  const [myPost, setMyPost] = useState(null);
 
+  useEffect(() => {
+    if (id) {
+      fetch(`https://blog-app-ve13.onrender.com/dashboard/${id}`)
+        .then((response) => {
+          if (!response.ok) {
+            console.error("Response not OK:", response);
+          }
+          return response.json();
+        })
+        .then((data) => {
+          setMyPost(data);
+        })
+        .catch((error) => console.error("Error fetching data:", error));
+    }
+  }, [id]);
 
-    const { id } = useParams();
-    console.log("ID from useParams:", id);
-    const [myPost, setMyPost] = useState(null);
+  if (!myPost) return <div className="text-center mt-10">Loading...</div>;
 
+  return (
+    <div className="px-4 sm:px-6 lg:px-16 py-10">
+      <div className="text-center mb-10">
+        <h1 className="text-2xl sm:text-3xl font-bold">Your Blog Posts</h1>
+      </div>
 
-
-
-
-    useEffect(() => {
-        if (id) {
-            fetch(`https://blog-app-ve13.onrender.com/dashboard/${id}`)
-                .then(response => {
-                    if (!response.ok) {
-                        console.error("Response not OK:", response);
-                    }
-
-                    return response.json();
-                })
-                .then(myPost => {
-                    console.log("Fetched data:", myPost);
-
-                    setMyPost(myPost);
-                })
-                .catch(error => console.error("Error fetching data:", error));
-        }
-    }, []);
-
-
-
-
-    if (!myPost) return <div>Loading.....</div>;
-
-
-   
-
-
-
-    return (
-
-        <div className="mx-40">
-
-            <div className="flex justify-center items-center mt-10 ">
-
-                <h1 className="text-3xl font-bold">Your Blog Post</h1>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+        {myPost.map((item) => (
+          <div
+            key={item._id}
+            className="border border-gray-300 rounded-2xl p-4 hover:shadow-2xl transition duration-300 bg-white"
+          >
+            <div className="w-full h-40 overflow-hidden rounded-xl flex justify-center items-center">
+              <img
+                src={`https://blog-app-ve13.onrender.com${item.cover}`}
+                alt="Post cover"
+                className="h-full w-full object-cover rounded-xl"
+              />
             </div>
 
-            <div className="flex justify-center items-center flex-wrap gap-x-10 gap-y-10 ">
+            <div className="mt-4">
+              <h2 className="text-lg font-bold text-gray-800 truncate">
+                {item.title}
+              </h2>
+              <p className="text-sm text-gray-600 mt-1 truncate">
+                {item.summary}
+              </p>
 
-                {
-
-                    myPost.map(item => (
-
-                        <div className="flex justify-center items-center  ">
-
-
-                            <div className="border-[1px] border-gray-400 h-[350px] md:w-[220px] sm:w-[350px] rounded-2xl mt-14  hover:shadow-2xl hover:shadow-gray-500/50 ">
-
-
-                                <div className="flex justify-center items-center">
-
-                                    <img  className="max-h-[180px] w-[200px] mt-2 rounded-2xl object-contain" src={`http://localhost:4000${item.cover}`} alt="sorry" />
-                                </div>
-
-
-                                <div className=" mt-3 ml-4 ">
-
-                                    <p className="text-lg font-bold">{item.title}</p>
-
-                                </div>
-
-
-
-                                <div className="flex text-sm mt-2 ml-4 gap-2">
-
-                                    <p className="text-gray-400 ">{item.name}</p>
-
-                                    <date className="text-gray-400">{item.createdAt}</date>
-
-                                </div>
-
-
-
-                                <div className=" mt-2 ml-4">
-
-                                    <p className="text-gray-400">{item.summary}</p>
-
-                                </div>
-
-
-
-
-
-                            </div>
-
-
-                        </div>
-                    ))
-                }
-
+              <div className="text-xs text-gray-400 mt-2">
+                <p>{item.name}</p>
+                <p>{new Date(item.createdAt).toLocaleDateString()}</p>
+              </div>
             </div>
-
-        </div>
-    )
-}
-
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
 
 export default Dashboard;
-
-
-
-
-
-
-
-
-
-
-
